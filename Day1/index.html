@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Landing Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">MyBrand</div>
+
+            <nav id="nav-links">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Services</a>
+                <a href="#">Contact</a>
+            </nav>
+
+            <div class="menu-toggle" id="menu-toggle">
+                ☰
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Build Your Future With Us</h1>
+            <p>
+                We create modern, responsive websites that help your business grow.
+                Clean design, fast performance, and user-friendly experience.
+            </p>
+            <a href="#" class="btn">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+
+    <footer>
+    <p>© 2026 MyBrand. All Rights Reserved.</p>
+    
+    <div class="social-links">
+        <a href="https://www.facebook.com" target="_blank" >Facebook</a>
+        <a href="https://www.instagram.com" target="_blank" >Instagram</a>
+        <a href="https://www.linkedin.com" target="_blank" >LinkedIn</a>
+    </div>
+</footer>
+
+
+    <script>
+        const toggle = document.getElementById('menu-toggle');
+        const nav = document.getElementById('nav-links');
+
+        toggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+    </script>
+
+</body>
+</html>
