@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Form Validation</title>
+    <style>
+    body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff0000, #ff4d4d, #b30000);
+    background-size: 200% 200%;
+    animation: shine 5s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Shiny animation */
+@keyframes shine {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Form Container */
+.container {
+    background: linear-gradient(145deg, #ffffff, #ffe6e6);
+    padding: 25px;
+    width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* Heading */
+h2 {
+    text-align: center;
+    color: #b30000;
+}
+
+/* Labels */
+label {
+    font-weight: bold;
+    color: #800000;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Inputs */
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ff4d4d;
+    font-size: 14px;
+}
+
+/* Focus Effect */
+input:focus, textarea:focus {
+    outline: none;
+    border: 1px solid #ff0000;
+    box-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(135deg, #cc0000, #ff0000);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #990000, #cc0000);
+    transform: scale(1.03);
+}
+
+/* Error */
+.error {
+    color: darkred;
+    font-size: 13px;
+}
+
+/* Success */
+.success {
+    color: green;
+    text-align: center;
+    margin-top: 10px;
+}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Contact Form</h2>
+
+    <form id="contactForm">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name">
+            <div class="error" id="nameError"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" id="email">
+            <div class="error" id="emailError"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message"></textarea>
+            <div class="error" id="messageError"></div>
+        </div>
+
+        <button type="submit">Submit</button>
+        <div class="success" id="successMessage"></div>
+    </form>
+</div>
+
+<script>
+    const form = document.getElementById("contactForm");
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Get input values
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        // Error elements
+        const nameError = document.getElementById("nameError");
+        const emailError = document.getElementById("emailError");
+        const messageError = document.getElementById("messageError");
+        const successMessage = document.getElementById("successMessage");
+
+        // Clear previous errors
+        nameError.textContent = "";
+        emailError.textContent = "";
+        messageError.textContent = "";
+        successMessage.textContent = "";
+
+        document.getElementById("name").classList.remove("input-error");
+        document.getElementById("email").classList.remove("input-error");
+        document.getElementById("message").classList.remove("input-error");
+
+        let isValid = true;
+
+        // Name validation
+        if (name === "") {
+            nameError.textContent = "Name is required.";
+            document.getElementById("name").classList.add("input-error");
+            isValid = false;
+        }
+
+        // Email validation using Regex
+        const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+        if (email === "") {
+            emailError.textContent = "Email is required.";
+            document.getElementById("email").classList.add("input-error");
+            isValid = false;
+        } else if (!email.match(emailPattern)) {
+            emailError.textContent = "Enter a valid email address.";
+            document.getElementById("email").classList.add("input-error");
+            isValid = false;
+        }
+
+        // Message validation
+        if (message === "") {
+            messageError.textContent = "Message cannot be empty.";
+            document.getElementById("message").classList.add("input-error");
+            isValid = false;
+        }
+
+        // If valid → show success
+        if (isValid) {
+            successMessage.textContent = "Form submitted successfully!";
+            form.reset();
+        }
+    });
+</script>
+
+</body>
+</html>
